@@ -1,88 +1,65 @@
-# ASTRA
-Astronomical Spectral Transformer for Redshift Approximation
+🚀 Project Overview
+This project aims to approximate the redshift of galaxies by analyzing their filter images and reconstructing their spectra using deep learning. The pipeline consists of:
+1️⃣ Data Collection & Preprocessing: Automating galaxy data downloads, isolating galaxies, and cleaning images.
+2️⃣ Spectrum Reconstruction: Using a CNN model to reconstruct missing spectra from filter images.
+3️⃣ Redshift Prediction: Feeding reconstructed spectra into an XGBoost model to estimate redshift values.
 
-This project focuses on reconstructing the spectrum of galaxies using deep learning techniques. The dataset used for this project is ASTROPIXEL, sourced from Kaggle. The model employs a Transformer-based architecture with patch embeddings, attention mechanisms, and feed-forward networks to learn spectral features from multi-channel astronomical images.
+📂 Dataset
+Source: SDSS Galaxy Survey
 
-Dataset
-Source: ASTROPIXEL (Kaggle)
+Size: ~3,500 galaxies
 
-The dataset contains FITS images and corresponding spectrum files for multiple galaxies.
+Filters Used: (u, g, r, i, z)
 
-Each galaxy has images in different filters, which serve as input to the model.
+Spectral Data: Corresponding spectra for each galaxy
 
-The target output is a continuous spectrum of the galaxy, interpolated to a fixed length of 4000 data points.
+📜 Methodology
+Automated Data Extraction: Using web scrapers (like Selenium) to fetch galaxy images and metadata.
 
-Model Architecture
-The model follows a structured pipeline:
+Preprocessing: Applying galmask, WCS coordinate conversion, and filtering noisy data.
 
-Data Preprocessing
+CNN-Based Spectrum Reconstruction: Training a neural network to estimate missing spectra from galaxy filters.
 
-FITS images are extracted and normalized using an arcsin transformation.
+XGBoost Model for Redshift Prediction: Using reconstructed spectra as input for redshift classification/regression.
 
-Images are split into small patches for feature extraction.
-
-The corresponding spectrum is interpolated to 4000 points.
-
-Feature Extraction
-
-A Static Patch CNN extracts features from image patches and converts them into 1280-dimensional embeddings.
-
-Positional encodings are added to retain spatial relationships.
-
-Transformer Encoder
-
-Uses Multi-Head Self-Attention and Feed-Forward Networks (MLP layers) to learn meaningful representations.
-
-A dummy token is introduced to store global information.
-
-Spectrum Reconstruction
-
-A decoder network maps the transformed embeddings to the final 4000-point spectrum.
-
-Code Structure
-extract_images(): Reads FITS files and extracts image data.
-
-stack_clean(): Normalizes image pixel values.
-
-make_patches(): Splits images into 16x16 patches.
-
-StaticPatchCNN: CNN for feature extraction from patches.
-
-TransformerBlock: Implements self-attention and MLP layers.
-
-TransformerEncoder: Stacks multiple transformer layers and introduces a dummy token.
-
-SpectrumDecoder: Maps transformer outputs to spectral data.
-
-GalaxyDataset: Custom dataset class for PyTorch, handling data loading and preprocessing.
-
-Requirements
-Install dependencies using:
+⚙️ Installation
+To set up the project, clone this repository and install dependencies:
 
 bash
 Copy
 Edit
-pip install numpy pandas torch torchvision astropy matplotlib torchinfo
-Usage
-Training the Model
-Set the dataset path in the folder_name variable.
+git clone https://github.com/yourusername/galaxy-redshift-prediction.git
+cd galaxy-redshift-prediction
+pip install -r requirements.txt
+▶️ Usage
+1️⃣ Preprocess Data
 
-Run the script to initialize and train the model:
-
-bash
+python
 Copy
 Edit
-python main.py
-The trained model will be saved as transformer.h.
+from preprocessing import clean_data
+clean_data("path/to/your/dataset")
+2️⃣ Train CNN for Spectrum Reconstruction
 
-Results & Next Steps
-The model learns galaxy spectral features from image patches.
+python
+Copy
+Edit
+from train_cnn import train_model
+train_model(epochs=100, batch_size=32)
+3️⃣ Predict Redshift using XGBoost
 
-Future work includes optimizing transformer layers and testing on larger datasets.
+python
+Copy
+Edit
+from redshift_predictor import predict_redshift
+predict_redshift("path/to/reconstructed/spectra")
+📊 Results
+CNN Accuracy on Spectrum Reconstruction: XX%
 
-Acknowledgments
-Dataset: ASTROPIXEL (Kaggle)
+XGBoost RMSE on Redshift Prediction: XX
 
-Libraries: PyTorch, Astropy, NumPy, Pandas
+❗ Issues & Contributions
+If you encounter any issues, report them in the Issues Tab. Contributions are welcome! 🚀
 
-Special thanks to SDSS for astronomical data
+📜 License
+This project is licensed under the MIT License
