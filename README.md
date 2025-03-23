@@ -1,10 +1,15 @@
 🚀 Project Overview
+
 This project aims to approximate the redshift of galaxies by analyzing their filter images and reconstructing their spectra using deep learning. The pipeline consists of:
+
 1️⃣ Data Collection & Preprocessing: Automating galaxy data downloads, isolating galaxies, and cleaning images.
+
 2️⃣ Spectrum Reconstruction: Using a CNN model to reconstruct missing spectra from filter images.
+
 3️⃣ Redshift Prediction: Feeding reconstructed spectra into an XGBoost model to estimate redshift values.
 
 📂 Dataset
+
 Source: SDSS Galaxy Survey
 
 Size: ~3,500 galaxies
@@ -14,6 +19,7 @@ Filters Used: (u, g, r, i, z)
 Spectral Data: Corresponding spectra for each galaxy
 
 📜 Methodology
+
 Automated Data Extraction: Using web scrapers (like Selenium) to fetch galaxy images and metadata.
 
 Preprocessing: Applying galmask, WCS coordinate conversion, and filtering noisy data.
@@ -23,6 +29,7 @@ CNN-Based Spectrum Reconstruction: Training a neural network to estimate missing
 XGBoost Model for Redshift Prediction: Using reconstructed spectra as input for redshift classification/regression.
 
 ⚙️ Installation
+
 To set up the project, clone this repository and install dependencies:
 
 bash
