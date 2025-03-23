@@ -28,3 +28,62 @@ To use this code, you need to have Python 3.x installed along with the following
 
 ```bash
 pip install numpy matplotlib astropy torch torchinfo pandas
+```
+## Usage
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/galaxy-spectrum-transformer.git
+   cd galaxy-spectrum-transformer
+   ```
+## Prepare your dataset
+
+Ensure your dataset is organized in the following structure:
+```bash
+Dataset/
+├── Galaxy_299490502078654464/
+│ ├── images/
+│ │ ├── image1.fits
+│ │ ├── image2.fits
+│ │ └── ...
+│ └── spectrum/
+│ └── spectrum.csv
+└── ...
+```
+
+## Run the model
+
+1. Modify the `folder_name` variable in the script to point to your dataset directory.
+2. Execute the script:
+
+```bash
+python main_v2.py
+```
+## Model Architecture
+
+The model consists of the following key components:
+
+**StaticPatchCNN**: A CNN that processes image patches and generates embeddings.
+
+**Attention_block**: Implements multi-head self-attention.
+
+**MLPBlock**: A multi-layer perceptron block used in the Transformer.
+
+**TransformerBlock**: Combines attention and MLP blocks.
+
+**TransformerEncoder**: A stack of Transformer blocks.
+
+**SpectrumDecoder**: Decodes the Transformer output to produce the spectrum.
+
+## Example model summary
+```python
+model = StaticPatchCNN(embed_dim=1280).to("cuda")
+summary(model, input_size=(324, 5, 256))
+```
+## Dataset
+
+The dataset should contain galaxy images in FITS format and corresponding spectra in CSV format. The `GalaxyDataset` class handles the loading and preprocessing of this data.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
