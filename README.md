@@ -1,72 +1,37 @@
-🚀 Project Overview
+# 🌌 Galaxy Redshift Prediction using CNN & XGBoost
 
-This project aims to approximate the redshift of galaxies by analyzing their filter images and reconstructing their spectra using deep learning. The pipeline consists of:
+![Galaxy Redshift](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Redshift_blueshift.svg/800px-Redshift_blueshift.svg.png)
 
-1️⃣ Data Collection & Preprocessing: Automating galaxy data downloads, isolating galaxies, and cleaning images.
+## 🚀 Project Overview
+This project aims to **predict the redshift of galaxies** using **deep learning**. The process involves:
+1. **Data Collection & Preprocessing** – Automating the download of galaxy images and cleaning them.
+2. **Spectrum Reconstruction** – Training a CNN to reconstruct galaxy spectra from filter images.
+3. **Redshift Prediction** – Using an XGBoost model to estimate the redshift.
 
-2️⃣ Spectrum Reconstruction: Using a CNN model to reconstruct missing spectra from filter images.
+## 📂 Dataset
+- **Source:** SDSS Galaxy Survey
+- **Size:** ~3,500 galaxies
+- **Filters Used:** (u, g, r, i, z)
+- **Spectral Data:** Corresponding spectra for each galaxy
 
-3️⃣ Redshift Prediction: Feeding reconstructed spectra into an XGBoost model to estimate redshift values.
+## 📜 Methodology
+1. **Automated Data Extraction:** Using Selenium to fetch galaxy images and metadata.
+2. **Preprocessing:** Applying `galmask`, WCS coordinate conversion, and noise filtering.
+3. **CNN-Based Spectrum Reconstruction:** Training a model to reconstruct missing spectra.
+4. **XGBoost for Redshift Prediction:** Using reconstructed spectra to estimate redshift.
 
-📂 Dataset
+## ⚙️ Installation
 
-Source: SDSS Galaxy Survey
+Clone the repository and install dependencies:
 
-Size: ~3,500 galaxies
-
-Filters Used: (u, g, r, i, z)
-
-Spectral Data: Corresponding spectra for each galaxy
-
-📜 Methodology
-
-Automated Data Extraction: Using web scrapers (like Selenium) to fetch galaxy images and metadata.
-
-Preprocessing: Applying galmask, WCS coordinate conversion, and filtering noisy data.
-
-CNN-Based Spectrum Reconstruction: Training a neural network to estimate missing spectra from galaxy filters.
-
-XGBoost Model for Redshift Prediction: Using reconstructed spectra as input for redshift classification/regression.
-
-⚙️ Installation
-
-To set up the project, clone this repository and install dependencies:
-
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/yourusername/galaxy-redshift-prediction.git
 cd galaxy-redshift-prediction
 pip install -r requirements.txt
-▶️ Usage
-1️⃣ Preprocess Data
 
-python
-Copy
-Edit
+## ▶️ Usage
+
+### 1️⃣ Preprocess Data
+```python
 from preprocessing import clean_data
 clean_data("path/to/your/dataset")
-2️⃣ Train CNN for Spectrum Reconstruction
-
-python
-Copy
-Edit
-from train_cnn import train_model
-train_model(epochs=100, batch_size=32)
-3️⃣ Predict Redshift using XGBoost
-
-python
-Copy
-Edit
-from redshift_predictor import predict_redshift
-predict_redshift("path/to/reconstructed/spectra")
-📊 Results
-CNN Accuracy on Spectrum Reconstruction: XX%
-
-XGBoost RMSE on Redshift Prediction: XX
-
-❗ Issues & Contributions
-If you encounter any issues, report them in the Issues Tab. Contributions are welcome! 🚀
-
-📜 License
-This project is licensed under the MIT License
